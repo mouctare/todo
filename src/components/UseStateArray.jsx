@@ -1,28 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const UseStateArray = () => {
-  const [people, setPeople] = React.useState(data);
-  const removeItem = (id) => {
-    // removeItem réçoit en paramètre l'id de l'élément à supprimer
-    let newPeople = people.filter((person) => person.id !== id);
-    setPeople(newPeople);
+  const [people, setPeople] = useState({
+    name: "peter",
+    age: 24,
+    message: "random message",
+  });
+  const changeMessage = () => {
+    // setPeople({ message: "hello world" });
+    // autre solution
+    setPeople({ ...people, message: "hello world" });
   };
   return (
-    <>
-      {people.map((person) => {
-        const { id, name } = person;
-        return (
-          <div key={id} className="item">
-            <h4>{name}</h4>
-            <button onClick={() => removeItem(id)}>remove</button>
-          </div>
-        );
-      })}
-
-      <button className="btn" onClick={() => setPeople([])}>
-        {/*  Ici je nettoi tout le tableau car il fait référence au state */}{" "}
-        clea items
-      </button>
-    </>
+    <section style={{ margin: "4rem 0" }}>
+      <h3>{people.name}</h3>
+      <h3>{people.age}</h3>
+      <h3>{people.message}</h3>
+      <button onClik={changeMessage}>Change message</button>
+    </section>
   );
 };
